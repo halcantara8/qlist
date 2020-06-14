@@ -1,19 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
+import Routes from './src/routes';
+import styles from './style';
 
-export default function App() {
+
+export default function App() {  
+  StatusBar.setBarStyle('default');
+  StatusBar.setBackgroundColor('#191970');
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.select({ ios: 'padding', android: 'f', })}>
+          <Routes/>
+      </KeyboardAvoidingView>  
+    </SafeAreaView>  
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
