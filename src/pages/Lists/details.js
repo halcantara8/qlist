@@ -83,6 +83,7 @@ export default function Details({ navigation }) {
         let list = await AsyncStorage.getItem(idList);
         list = JSON.parse(list);
         list.itens.sort((a, b) => { return b.order - a.order });
+        list.itens.sort((a, b) => { return a.status - b.status });
 
         await setDataItens(list.itens);
         await setAllItens(list.itens);
@@ -242,20 +243,26 @@ export default function Details({ navigation }) {
                 )} />
             <View
                 style={{
-                    opacity: opacityAnim, width: '100%',
+                    width: '100%',
                     flexDirection: 'row', alignItems: 'center',
                     justifyContent: 'flex-start',
                     alignSelf: 'flex-start',
-                    backgroundColor: '#fff', paddingBottom: 5, height: 70
+                    backgroundColor: '#fff', paddingBottom: 5,
+                    height: 70, position: 'absolute', bottom: 0, alignSelf: 'center'
                 }}>
-                <View style={{ width: '80%', paddingVertical: 10, borderTopLeftRadius: 8, borderBottomLeftRadius: 8, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#20B2AA' }}>
+                <View style={{ 
+                    width: '80%', paddingVertical: 10,
+                    borderTopLeftRadius: 8, borderBottomLeftRadius: 8,
+                    backgroundColor: '#FFF', borderWidth: 1,
+                    borderColor: '#20B2AA', 
+                    }}>
                     <TextInput
                         ref={idInput}
                         value={itemText}
                         onChangeText={setItemText}
                         multiline={true}
-                        style={[styles.input, { padding: 2, width: '100%', color: '#111' }]}
-                        placeholder="Insira um intem"
+                        style={[styles.input, { padding: 2, width: '100%', color: '#111', opacity: opacityAnim,  }]}
+                        placeholder="Insira um item"
                         placeholderTextColor="#ccc"
                         selectionColor='#000'
                         onBlur={cancelEdit}
